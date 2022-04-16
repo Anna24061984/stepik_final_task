@@ -4,7 +4,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-from .locators import BasePageLocators
+from .locators import BasePageLocators, BasketPageLocators
 import math
 import time
 import pyperclip
@@ -24,6 +24,10 @@ class BasePage():
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"    
+        
+    def go_to_basket(self):                     #С главной или со страницы продукта можно перейти в корзину
+        btn = self.browser.find_element(*BasketPageLocators.BASKET_BTN)
+        btn.click()
         
     def is_element_present(self, how, what):
         try:
